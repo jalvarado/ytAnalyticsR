@@ -1,0 +1,6 @@
+^renv$
+^renv\.lock$
+^ytAnalyticsR\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^\.httr-oauth$
