@@ -1,2 +1,8 @@
 .Rproj.user
 .httr-oauth
+.Renv
+renv/
+.Rhistory
+.Rprofile
+gar_parse_error.rds
+renv.lock
