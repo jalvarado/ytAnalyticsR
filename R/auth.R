@@ -16,5 +16,5 @@ yt_auth <- function() {
                        "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                        "https://www.googleapis.com/auth/yt-analytics.readonly")
 
-  googleAuthR::gar_auth()
+  googleAuthR::gar_auto_auth(required_scopes = required_scopes)
 }
