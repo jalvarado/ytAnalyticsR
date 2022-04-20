@@ -12,7 +12,7 @@ playlists.query(
   dimensions = NULL,
   sort = NULL,
   filters = NULL,
-  ids = NULL
+  ids = c("channel==MINE")
 )
 }
 \description{

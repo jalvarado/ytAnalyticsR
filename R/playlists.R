@@ -27,5 +27,23 @@ playlists.query <- function(playlist_id, startDate = NULL, endDate = NULL, metri
   df <- as.data.frame(r$rows)
   colnames(df) <- c(r$columnHeaders$name)
 
+  df['playlist_id'] <- playlist_id
   df
+}
+
+#' Take a vector of playlist ids and call playlists.query for each.
+#'
+#' @param playlist_ids Vector of playlist id strings
+#'
+#' @return data.frame containing the results from all queries
+#'
+#' @export
+vplaylist.query <- function(playlist_ids, ...) {
+  dfs <- list()
+  for(i in 1:length(playlist_ids)) {
+    id <- playlist_ids[i]
+    dfs[[i]] <- playlists.query(id, ...)
+  }
+
+  do.call(what = rbind, args = dfs)
 }
