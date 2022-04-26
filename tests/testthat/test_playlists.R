@@ -2,7 +2,7 @@ library(testthat)
 library(ytAnalyticsR)
 
 testthat::test_that("Response rows are converted to dataframe rows", {
-  response_str = '{
+  response_str <- '{
     "kind": "youtubeAnalytics#resultTable",
     "columnHeaders": [
       {
@@ -22,14 +22,14 @@ testthat::test_that("Response rows are converted to dataframe rows", {
     ]
   }'
   api_response <- jsonlite::fromJSON(response_str)
-  mockery::stub(playlists.query, 'reports.query', api_response)
+  mockery::stub(playlists.query, "reports.query", api_response)
 
   playlist_args <- list(
-    startDate = '2022-01-01',
-    endDate = '2022-04-30',
-    metrics = 'views,playlistStarts,viewsPerPlaylistStart,averageTimeInPlaylist',
-    dimensions = 'day',
-    sort = 'day'
+    start_date = "2022-01-01",
+    end_date = "2022-04-30",
+    metrics = "views,playlistStarts,viewsPerPlaylistStart,averageTimeInPlaylist",
+    dimensions = "day",
+    sort = "day"
   )
   playlist_id <- "fake_playlist_id"
   playlist_metrics <- do.call(playlists.query, c(playlist_id, playlist_args))
@@ -39,7 +39,7 @@ testthat::test_that("Response rows are converted to dataframe rows", {
 
 testthat::test_that("Response column headers are converted to data.frame column names", {
   # Empty API response
-  response_str = '{
+  response_str <- '{
     "kind": "youtubeAnalytics#resultTable",
     "columnHeaders": [
       {
@@ -51,14 +51,14 @@ testthat::test_that("Response column headers are converted to data.frame column 
     "rows": []
   }'
   api_response <- jsonlite::fromJSON(response_str)
-  mockery::stub(playlists.query, 'reports.query', api_response)
+  mockery::stub(playlists.query, "reports.query", api_response)
 
   playlist_args <- list(
-    startDate = '2022-01-01',
-    endDate = '2022-04-30',
-    metrics = 'views,playlistStarts,viewsPerPlaylistStart,averageTimeInPlaylist',
-    dimensions = 'day',
-    sort = 'day'
+    start_date = "2022-01-01",
+    end_date = "2022-04-30",
+    metrics = "views,playlistStarts,viewsPerPlaylistStart,averageTimeInPlaylist",
+    dimensions = "day",
+    sort = "day"
   )
   playlist_id <- "fake_playlist_id"
   playlist_metrics <- do.call(playlists.query, c(playlist_id, playlist_args))
@@ -69,7 +69,7 @@ testthat::test_that("Response column headers are converted to data.frame column 
 
 test_that("An empty API response results in an empty data.frame", {
   # Empty API response
-  response_str = '{
+  response_str <- '{
     "kind": "youtubeAnalytics#resultTable",
     "columnHeaders": [
       {
@@ -81,18 +81,17 @@ test_that("An empty API response results in an empty data.frame", {
     "rows": []
   }'
   api_response <- jsonlite::fromJSON(response_str)
-  mockery::stub(playlists.query, 'reports.query', api_response)
+  mockery::stub(playlists.query, "reports.query", api_response)
 
   playlist_args <- list(
-    startDate = '2022-01-01',
-    endDate = '2022-04-30',
-    metrics = 'views,playlistStarts,viewsPerPlaylistStart,averageTimeInPlaylist',
-    dimensions = 'day',
-    sort = 'day'
+    start_date = "2022-01-01",
+    end_date = "2022-04-30",
+    metrics = "views,playlistStarts,viewsPerPlaylistStart,averageTimeInPlaylist",
+    dimensions = "day",
+    sort = "day"
   )
   playlist_id <- "fake_playlist_id"
   playlist_metrics <- do.call(playlists.query, c(playlist_id, playlist_args))
 
   testthat::expect_equal(nrow(playlist_metrics), 0)
 })
-
