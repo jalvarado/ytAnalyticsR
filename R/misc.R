@@ -11,3 +11,15 @@ rmNullObs <- function(x) {
   lapply(x, function(x) if (is.list(x))
     rmNullObs(x) else x)
 }
+
+responseToDF <- function(r) {
+  if(length(r$rows) == 0) {
+    df <- data.frame(matrix(ncol = length(c(r$columnHeaders$name)), nrow = 0))
+    colnames(df) <- c(r$columnHeaders$name)
+  } else {
+    df <- as.data.frame(r$rows)
+    colnames(df) <- c(r$columnHeaders$name)
+  }
+
+  df
+}
