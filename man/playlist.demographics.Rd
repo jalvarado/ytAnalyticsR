@@ -6,6 +6,16 @@
 \usage{
 playlist.demographics(playlist_id, start_date = NULL, end_date = NULL)
 }
+\arguments{
+\item{playlist_id}{YouTube Playlist ID string}
+
+\item{start_date}{Beginning date of the query date range.}
+
+\item{end_date}{End date of the query date range.}
+}
+\value{
+DataFrame
+}
 \description{
 Query the Analytics API for playlist demographics metrics
 }

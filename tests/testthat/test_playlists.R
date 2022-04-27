@@ -6,12 +6,12 @@ testthat::test_that("Response rows are converted to dataframe rows", {
     "kind": "youtubeAnalytics#resultTable",
     "columnHeaders": [
       {
-        "name": "column1",
+        "name": "views",
         "dataType": "STRING",
         "columnType": "METRIC"
       },
       {
-        "name": "column2",
+        "name": "day",
         "dataType": "STRING",
         "columnType": "DIMENSION"
       }
@@ -27,7 +27,7 @@ testthat::test_that("Response rows are converted to dataframe rows", {
   playlist_args <- list(
     start_date = "2022-01-01",
     end_date = "2022-04-30",
-    metrics = "views,playlistStarts,viewsPerPlaylistStart,averageTimeInPlaylist",
+    metrics = "views",
     dimensions = "day",
     sort = "day"
   )
@@ -37,15 +37,20 @@ testthat::test_that("Response rows are converted to dataframe rows", {
   testthat::expect_equal(nrow(playlist_metrics), 2)
 })
 
-testthat::test_that("Response column headers are converted to data.frame column names", {
+testthat::test_that("Response column headers are mapped to column names", {
   # Empty API response
   response_str <- '{
     "kind": "youtubeAnalytics#resultTable",
     "columnHeaders": [
       {
-        "name": "column1",
+        "name": "views",
         "dataType": "STRING",
         "columnType": "METRIC"
+      },
+      {
+        "name": "day",
+        "dataType": "STRING",
+        "columnType": "DIMENSION"
       }
     ],
     "rows": []
@@ -56,14 +61,17 @@ testthat::test_that("Response column headers are converted to data.frame column 
   playlist_args <- list(
     start_date = "2022-01-01",
     end_date = "2022-04-30",
-    metrics = "views,playlistStarts,viewsPerPlaylistStart,averageTimeInPlaylist",
+    metrics = "views",
     dimensions = "day",
     sort = "day"
   )
   playlist_id <- "fake_playlist_id"
   playlist_metrics <- do.call(playlists.query, c(playlist_id, playlist_args))
 
-  testthat::expect_equal(c("column1", "playlist_id"), colnames(playlist_metrics))
+  testthat::expect_equal(
+    c("views", "day", "playlist_id"),
+    colnames(playlist_metrics)
+  )
   testthat::expect_equal(nrow(playlist_metrics), 0)
 })
 
@@ -73,9 +81,14 @@ test_that("An empty API response results in an empty data.frame", {
     "kind": "youtubeAnalytics#resultTable",
     "columnHeaders": [
       {
-        "name": "column1",
+        "name": "views",
         "dataType": "STRING",
         "columnType": "METRIC"
+      },
+      {
+        "name": "day",
+        "dataType": "STRING",
+        "columnType": "DIMENSION"
       }
     ],
     "rows": []
@@ -86,7 +99,7 @@ test_that("An empty API response results in an empty data.frame", {
   playlist_args <- list(
     start_date = "2022-01-01",
     end_date = "2022-04-30",
-    metrics = "views,playlistStarts,viewsPerPlaylistStart,averageTimeInPlaylist",
+    metrics = "views",
     dimensions = "day",
     sort = "day"
   )

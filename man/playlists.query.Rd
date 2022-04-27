@@ -2,12 +2,12 @@
 % Please edit documentation in R/playlists.R
 \name{playlists.query}
 \alias{playlists.query}
-\title{Query the analytics API for playlist metrics}
+\title{Query the analytics API for playlist metrics.}
 \usage{
 playlists.query(
   playlist_id,
-  startDate = NULL,
-  endDate = NULL,
+  start_date = NULL,
+  end_date = NULL,
   metrics = NULL,
   dimensions = NULL,
   sort = NULL,
@@ -15,6 +15,29 @@ playlists.query(
   ids = c("channel==MINE")
 )
 }
+\arguments{
+\item{playlist_id}{YouTube Playlist ID string}
+
+\item{start_date}{Beginning date of the query date range.}
+
+\item{end_date}{End date of the query date range.}
+
+\item{metrics}{Comma seperated string of requested metrics.}
+
+\item{dimensions}{Comma seperated string of requested dimensions.}
+
+\item{sort}{Comma seperated string of dimensions to sort by.  Prepend
+dimension name with '-' to indicate a descending sort.}
+
+\item{filters}{semi-colon seperated string of filter conditions to apply
+to the result set.}
+
+\item{ids}{ID string used to determine which channel or content owner to
+query for data}
+}
+\value{
+data.frame containing the API response rows.
+}
 \description{
-Query the analytics API for playlist metrics
+The playlist ID will be added as a dimension to the returned data.frame.
 }
