@@ -1,0 +1,3 @@
+library(webmockr)
+
+webmockr::enable()
