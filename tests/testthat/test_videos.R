@@ -57,12 +57,13 @@ testthat::test_that("an empty api response returns an empty dataframe", {
 
   video_id <- "fake_video_id123"
   video_metrics <- video.query(video_id,
-                               start_date = "2022-01-01",
-                               end_date = "2022-04-30",
-                               metrics = "views",
-                               dimensions = "day",
-                               sort = "day")
-  #video_metrics <- do.call(video.query, c(video_id, video_args))
+    start_date = "2022-01-01",
+    end_date = "2022-04-30",
+    metrics = "views",
+    dimensions = "day",
+    sort = "day"
+  )
+  # video_metrics <- do.call(video.query, c(video_id, video_args))
 
   mockery::expect_called(mock_reports_query, 1)
   testthat::expect_equal(nrow(video_metrics), 0)
@@ -190,14 +191,40 @@ testthat::test_that("vvideo.query makes multiple calls to the api", {
   mockery::stub(vvideo.query, "reports.query", mock_responses, depth = 2)
 
   video_ids <- c("fake_video_id123", "totally_not_fake")
-  video_metrics <- vvideo.query(video_ids, start_date = "2022-01-01",
-                                end_date = "2022-04-30",
-                                metrics = "views",
-                                dimensions = "day",
-                                sort = "day")
+  video_metrics <- vvideo.query(video_ids,
+    start_date = "2022-01-01",
+    end_date = "2022-04-30",
+    metrics = "views",
+    dimensions = "day",
+    sort = "day"
+  )
 
   mockery::expect_called(mock_responses, 2)
   testthat::expect_equal(nrow(video_metrics), 2)
   testthat::expect_s3_class(video_metrics, "data.frame")
   testthat::expect_equal(video_metrics$views, c("value1", "value3"))
+})
+
+testthat::test_that("vvideo.demographics calls vvideo.query for each id", {
+  mock <- mockery::mock()
+  mockery::stub(vvideo.demographics, "vvideo.query", mock)
+
+  video_ids <- c("video_id_1", "video_id_2")
+
+  results <- vvideo.demographics(video_ids,
+    start_date = "2022-01-01",
+    end_date = "2022-01-01"
+  )
+  args <- mockery::mock_args(mock)
+
+  expected_args <- list(
+    "video_id_1",
+    "video_id_2",
+    start_date = "2022-01-01",
+    end_date = "2022-01-01",
+    metrics = "viewerPercentage",
+    dimensions = "gender,ageGroup"
+  )
+  mockery::expect_called(mock, 1)
+  testthat::expect_equal(args[[1]], expected_args)
 })

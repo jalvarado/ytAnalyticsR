@@ -57,8 +57,8 @@ video.query <- function(video_id, metrics = NULL, filters = NULL,
 #'
 #' @export
 video.demographics <- function(video_id, start_date, end_date,
-                               filters = NULL, sort = 'ageGroup,gender',
-                               ids = 'channel==MINE') {
+                               filters = NULL, sort = "ageGroup,gender",
+                               ids = "channel==MINE") {
   api_args <- list(
     startDate = start_date,
     endDate = end_date,
@@ -106,4 +106,25 @@ vvideo.query <- function(video_ids, ...) {
   }
 
   merged_df <- Reduce(function(d1, d2) merge(d1, d2, all = TRUE), dfs)
+}
+
+#' Query the Analytics API and retrieve metrics for the given video ids
+#'
+#' @param video_ids vector of YouTube video id strings
+#' @param filters string of semi-colon separated filters to apply to the query
+#' @param start_date date string in 'YYYY-mm-dd' format
+#' @param end_Date date string in 'YYYY-mm-dd' format
+#' @param sort string of comma separated list of dimensions to sort by.  Prepend
+#'   the dimension name with '-' to sort descending
+#' @param ids string of semi-colon separated id terms.  i.e. 'channel==MINE'
+#'
+#' @return data.frame
+#'
+#' @export
+vvideo.demographics <- function(video_ids, ...) {
+  fargs <- list(...)
+  fargs$metrics <- "viewerPercentage"
+  fargs$dimensions <- "gender,ageGroup"
+
+  do.call(vvideo.query, c(video_ids, fargs))
 }
