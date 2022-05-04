@@ -66,9 +66,26 @@ Google documentation: [Enable and Disable APIs](https://support.google.com/googl
 3. Open the APIs & Services page then select Credentials
 4. Click the "+ Create Credentials" link at the top of the page and select "OAuth Client ID"
 
-### 4. Obtain the OAuth application client_id and client_secret
+### 4. Configure the R package
+To connect to the OAuth application created in the Google Console you must set
+the googleAuthR options for the client ID and client secret.  You must also
+specify the required authorization scopes which the application will use to
+access the YouTube APIs.
 
-#### 5. Authenticate with the API using OAuth 2.0
+```
+library(ytAnalyticsR)
+
+options(googleAuthR.client_id = "<CLIENT_ID>")
+options(googleAuthR.client_secret = "<CLIENT_SECRET>")
+
+scopes <- c("https://www.googleapis.com/auth/youtube",
+             "https://www.googleapis.com/auth/youtube.readonly",
+             "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+             "https://www.googleapis.com/auth/yt-analytics.readonly")
+options(googleAuthR.scopes.selected = scopes)
+```
+
+### 5. Authenticate with the API using OAuth 2.0
 The OAuth authentication process requires an interactive environment and the authentication token will expire after 24 hours.
 
 1. In the R console enter `ytAnalyticsR::yt_auth()` and press enter
@@ -77,3 +94,17 @@ The OAuth authentication process requires an interactive environment and the aut
 4. You will then be asked to allow the OAuth application to access your YouTube data.  Accept this prompt.
 5. You will then be redirected to a success page and notified that you can close this window.
 6. Return to the R console and you should see a confirmation message that the authentication was successful
+
+### 6. Confirm the setup worked and make a test call
+Test that everything is working correctly by fetching the metrics for a given
+video id.
+
+```
+df <- video.query("YouTube_Video_ID",
+                 startDate = '2022-04-01',
+                 endDate = '2022-04-30',
+                 metrics = 'views,likes,dislikes',
+                 dimensions = 'day',
+                 sort = 'day',
+                 ids = "channel)
+```
