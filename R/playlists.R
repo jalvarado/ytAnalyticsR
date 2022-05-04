@@ -75,7 +75,7 @@ playlists.query <- function(playlist_id, start_date = NULL,
 #' @export
 vplaylist.query <- function(playlist_ids, ...) {
   dfs <- list()
-  for (i in seq_length(length(playlist_ids))) {
+  for (i in seq_len(length(playlist_ids))) {
     id <- playlist_ids[i]
     dfs[[i]] <- playlists.query(id, ...)
   }
