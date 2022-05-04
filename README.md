@@ -9,7 +9,13 @@ power custom reports in response to user interactions. Or retrieve and store
 bulk reports using the YouTube Reporting API for further processing using
 the big data tools you are most familiar with.
 
-## Install the development version of the package from GitLab Repo
+## Install the development version of the package from Git Repo
+
+The library can be installed using `devtools::install_git()`.
+
+This may require setting up a SSH keypair to authenticate with the Git repository
+host.  In this case `git2r::cred_ssh_key()` can be used to securely provide
+the SSH key files to devtools.
 
 ```
 # Install devtools from CRAN
