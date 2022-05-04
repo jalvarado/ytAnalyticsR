@@ -11,10 +11,13 @@
 #' @import googleAuthR
 #' @export
 yt_auth <- function() {
-  required_scopes <- c("https://www.googleapis.com/auth/youtube",
-                       "https://www.googleapis.com/auth/youtube.readonly",
-                       "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
-                       "https://www.googleapis.com/auth/yt-analytics.readonly")
+  required_scopes <- c(
+    "https://www.googleapis.com/auth/youtube",
+    "https://www.googleapis.com/auth/youtube.readonly",
+    "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+    "https://www.googleapis.com/auth/yt-analytics.readonly"
+  )
 
-  googleAuthR::gar_auto_auth(required_scopes = required_scopes)
+  googleAuthR::gar_auth()
+  # googleAuthR::gar_auto_auth(required_scopes = required_scopes)
 }
