@@ -100,12 +100,12 @@ video.demographics <- function(video_id, start_date, end_date,
 #' @export
 vvideo.query <- function(video_ids, ...) {
   dfs <- list()
-  for (i in seq_len(length(video_ids))) {
-    video_id <- video_ids[[i]]
-    dfs[[i]] <- video.query(video_id, ...)
+  for (id in video_ids) {
+    df <- video.query(id, ...)
+    dfs <- append(dfs, list(df))
   }
 
-  merged_df <- Reduce(function(d1, d2) merge(d1, d2, all = TRUE), dfs)
+  do.call(what = rbind, args = dfs)
 }
 
 #' Query the Analytics API and retrieve metrics for the given video ids

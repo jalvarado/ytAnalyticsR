@@ -75,9 +75,9 @@ playlists.query <- function(playlist_id, start_date = NULL,
 #' @export
 vplaylist.query <- function(playlist_ids, ...) {
   dfs <- list()
-  for (i in seq_len(length(playlist_ids))) {
-    id <- playlist_ids[i]
-    dfs[[i]] <- playlists.query(id, ...)
+  for (id in playlist_ids) {
+    df <- playlists.query(id, ...)
+    dfs <- append(dfs, list(df))
   }
 
   do.call(what = rbind, args = dfs)
