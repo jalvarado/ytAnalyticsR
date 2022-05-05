@@ -96,25 +96,13 @@ vplaylist.query <- function(playlist_ids, ...) {
 playlist.demographics <- function(playlist_id, start_date = NULL,
                                   end_date = NULL) {
   api_args <- list(
-    startDate = start_date,
-    endDate = end_date,
+    start_date = start_date,
+    end_date = end_date,
     ids = "channel==MINE",
-    filters = paste0("isCurated==1;playlist==", playlist_id),
     metric = "viewerPercentage",
     dimensions = "gender,ageGroup",
     sort = "gender,ageGroup"
   )
 
-  r <- do.call(reports.query, rmNullObs(api_args))
-
-  if (length(r$rows) == 0) {
-    df <- data.frame(matrix(ncol = length(r$columnHeaders$name) + 1, nrow = 0))
-    colnames(df) <- c(r$columnHeaders$name, "playlist_id")
-  } else {
-    df <- as.data.frame(r$rows)
-    colnames(df) <- c(r$columnHeaders$name)
-    df["playlist_id"] <- playlist_id
-  }
-
-  df
+  do.call(playlists.query, c(playlist_id, rmNullObs(api_args)))
 }
