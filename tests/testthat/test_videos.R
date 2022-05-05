@@ -63,7 +63,6 @@ testthat::test_that("an empty api response returns an empty dataframe", {
     dimensions = "day",
     sort = "day"
   )
-  # video_metrics <- do.call(video.query, c(video_id, video_args))
 
   mockery::expect_called(mock_reports_query, 1)
   testthat::expect_equal(nrow(video_metrics), 0)
