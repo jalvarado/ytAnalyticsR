@@ -19,5 +19,4 @@ yt_auth <- function() {
   )
 
   googleAuthR::gar_auth()
-  # googleAuthR::gar_auto_auth(required_scopes = required_scopes)
 }
