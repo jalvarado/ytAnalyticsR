@@ -1,9 +1,8 @@
 Package: ytAnalyticsR
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Title: Query the YouTube Analytics and Reporting APIs
+Version: 0.0.0.9002
+Authors@R:
+    person("Juan", "Alvarado", , "wok1@cdc.gov", role = c("aut", "cre"))
 Description: Query the YouTube Analytics API and retrieve reports from the YouTube Reporting API.
 License: MIT + file LICENSE
 Depends:
@@ -14,7 +13,7 @@ Imports:
   googleAuthR (>= 2.0.0)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Suggests: 
+Suggests:
     testthat (>= 3.0.0),
     webmockr (>= 0.8.0),
     mockery (>= 0.4.3)
