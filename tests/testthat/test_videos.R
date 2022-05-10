@@ -21,15 +21,14 @@ testthat::test_that("video.query calls reports.query", {
   mock_reports_query <- mockery::mock(jsonlite::fromJSON(response_str))
   mockery::stub(video.query, "reports.query", mock_reports_query)
 
-  video_args <- list(
+  video_id <- "fake_video_id123"
+  video_metrics <- video.query(video_id,
     start_date = "2022-01-01",
     end_date = "2022-04-30",
     metrics = "views",
     dimensions = "day",
     sort = "day"
   )
-  video_id <- "fake_video_id123"
-  video_metrics <- do.call(video.query, c(video_id, video_args))
 
   mockery::expect_called(mock_reports_query, 1)
   testthat::expect_equal(nrow(video_metrics), 2)

@@ -24,15 +24,13 @@ test_that("Response rows are converted to dataframe rows", {
   api_response <- jsonlite::fromJSON(response_str)
   mockery::stub(playlists.query, "reports.query", api_response)
 
-  playlist_args <- list(
-    start_date = "2022-01-01",
-    end_date = "2022-04-30",
-    metrics = "views",
-    dimensions = "day",
-    sort = "day"
-  )
   playlist_id <- "fake_playlist_id"
-  playlist_metrics <- do.call(playlists.query, c(playlist_id, playlist_args))
+  playlist_metrics <- playlists.query(playlist_id,
+                                      start_date = "2022-01-01",
+                                      end_date = "2022-04-30",
+                                      metrics = "views",
+                                      dimensions = "day",
+                                      sort = "day")
 
   testthat::expect_equal(nrow(playlist_metrics), 2)
 })

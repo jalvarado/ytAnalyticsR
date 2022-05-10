@@ -29,7 +29,7 @@ video.query <- function(video_id, metrics = NULL, filters = NULL,
     startDate = start_date, endDate = end_date,
     dimensions = dimensions, sort = sort, ids = ids
   )
-  r <- do.call(ytAnalyticsR::reports.query, ytAnalyticsR::rmNullObs(api_args))
+  r <- do.call(reports.query, rmNullObs(api_args))
 
   if (length(r$rows) == 0) {
     df <- data.frame(matrix(ncol = length(r$columnHeaders$name) + 1, nrow = 0))
@@ -69,7 +69,7 @@ video.demographics <- function(video_id, start_date, end_date,
     sort = sort
   )
 
-  r <- do.call(ytAnalyticsR::reports.query, ytAnalyticsR::rmNullObs(api_args))
+  r <- do.call(reports.query, rmNullObs(api_args))
 
   if (length(r$rows) == 0) {
     df <- data.frame(matrix(ncol = length(r$columnHeaders$name) + 1, nrow = 0))

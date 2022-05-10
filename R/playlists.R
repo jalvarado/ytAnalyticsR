@@ -40,7 +40,7 @@ playlists.query <- function(playlist_id, start_date = NULL,
     metrics = metrics, filters = all_filters, startDate = start_date,
     endDate = end_date, dimensions = dimensions, sort = sort, ids = ids
   )
-  r <- do.call(ytAnalyticsr::reports.query, ytAnalyticsR::rmNullObs(api_args))
+  r <- do.call(reports.query, rmNullObs(api_args))
 
   if (length(r$rows) == 0) {
     df <- data.frame(matrix(ncol = length(r$columnHeaders$name) + 1, nrow = 0))
@@ -104,5 +104,5 @@ playlist.demographics <- function(playlist_id, start_date = NULL,
     sort = "gender,ageGroup"
   )
 
-  do.call(playlists.query, c(playlist_id, ytAnalyticsR::rmNullObs(api_args)))
+  do.call(playlists.query, c(playlist_id, rmNullObs(api_args)))
 }
