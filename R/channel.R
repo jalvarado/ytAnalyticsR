@@ -1,0 +1,36 @@
+#' Query the analytics API for channel metrics
+#'
+#' @param channel_id YouTube channel ID string
+#' @param start_date Beginning date of the query date range
+#' @param end_date End date of the query date range
+#' @param metrics Comma-seperated string of metric names
+#' @param dimensiosn Comma-seperated string of dimension names
+#' @param sort Comma-seperated string of dimension names to sort by.  Prepend
+#' dimension names with '-' to sort that dimension in descending order
+#' @param filters Semi-colon seperated string of filter conditions to apply
+#' to the result set.
+#'
+#' @return data.frame containing the API response rows
+#'
+#' @export
+channel.query <- function(channel_id, start_date = NULL, end_date = NULL,
+                          metrics = NULL, dimensions = NULL, sort = NULL,
+                          filters = NULL) {
+  if (missing(channel_id)) {
+    stop("channel_id is required")
+  }
+  assertthat::assert_that(is.character(channel_id))
+
+  api_args <- list(
+    ids = paste0("channel==", channel_id),
+    startDate = start_date,
+    endDate = end_date,
+    metrics = metrics,
+    dimensions = dimensions,
+    sort = sort,
+    filters = filters
+  )
+
+  r <- do.call(reports.query, rmNullObs(api_args))
+  response_to_data_frame(r)
+}
