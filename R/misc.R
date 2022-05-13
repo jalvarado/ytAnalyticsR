@@ -8,12 +8,17 @@ is.NullOb <- function(x) is.null(x) | all(sapply(x, is.null))
 #' @keywords internal
 rmNullObs <- function(x) {
   x <- Filter(Negate(is.NullOb), x)
-  lapply(x, function(x) if (is.list(x))
-    rmNullObs(x) else x)
+  lapply(x, function(x) {
+    if (is.list(x)) {
+      rmNullObs(x)
+    } else {
+      x
+    }
+  })
 }
 
-responseToDF <- function(r) {
-  if(length(r$rows) == 0) {
+response_to_data_frame <- function(r) {
+  if (length(r$rows) == 0) {
     df <- data.frame(matrix(ncol = length(c(r$columnHeaders$name)), nrow = 0))
     colnames(df) <- c(r$columnHeaders$name)
   } else {
