@@ -26,13 +26,57 @@ test_that("Response rows are converted to dataframe rows", {
 
   playlist_id <- "fake_playlist_id"
   playlist_metrics <- playlists.query(playlist_id,
-                                      start_date = "2022-01-01",
-                                      end_date = "2022-04-30",
-                                      metrics = "views",
-                                      dimensions = "day",
-                                      sort = "day")
+    start_date = "2022-01-01",
+    end_date = "2022-04-30",
+    metrics = "views",
+    dimensions = "day",
+    sort = "day"
+  )
 
   testthat::expect_equal(nrow(playlist_metrics), 2)
+})
+
+test_that("playlist_id is added to the dataframe", {
+  # Empty API response
+  response_str <- '{
+    "kind": "youtubeAnalytics#resultTable",
+    "columnHeaders": [
+      {
+        "name": "views",
+        "dataType": "STRING",
+        "columnType": "METRIC"
+      },
+      {
+        "name": "day",
+        "dataType": "STRING",
+        "columnType": "DIMENSION"
+      }
+    ],
+    "rows": [
+      [1, "2022-04-01"],
+      [2, "2022-04-02"]
+    ]
+  }'
+  api_response <- jsonlite::fromJSON(response_str)
+  mockery::stub(playlists.query, "reports.query", api_response)
+
+  playlist_args <- list(
+    start_date = "2022-01-01",
+    end_date = "2022-04-30",
+    metrics = "views",
+    dimensions = "day",
+    sort = "day"
+  )
+  playlist_id <- "fake_playlist_id"
+  playlist_metrics <- do.call(playlists.query, c(playlist_id, playlist_args))
+
+  expected_df <- data.frame(
+    views = c("1", "2"),
+    day = c("2022-04-01", "2022-04-02"),
+    playlist_id = c(playlist_id, playlist_id)
+  )
+
+  expect_identical(playlist_metrics, expected_df)
 })
 
 test_that("Response column headers are mapped to column names", {
