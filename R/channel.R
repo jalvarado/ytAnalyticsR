@@ -34,3 +34,26 @@ channel.query <- function(channel_id, start_date = NULL, end_date = NULL,
   r <- do.call(reports.query, rmNullObs(api_args))
   response_to_data_frame(r)
 }
+
+#' Query the Analytics API for channel demographics metrics
+#'
+#' @param channel_id YouTube channel ID
+#' @param start_date Beginning date of the query date range. YYYY-mm-dd
+#' @param end_date End date of the query date range. YYYY-mm-dd
+#'
+#' @return data.frame
+#'
+#' @export
+channel.demographics <- function(channel_id,
+                                 start_date = NULL, end_date = NULL,
+                                 filters = NULL) {
+  api_args <- list(
+    start_date = start_date,
+    end_date = end_date,
+    metric = "viewerPercentage",
+    dimensions = "gender,ageGroup",
+    sort = "gender,ageGroup"
+  )
+
+  do.call(channel.query, c(channel_id, rmNullObs(api_args)))
+}
