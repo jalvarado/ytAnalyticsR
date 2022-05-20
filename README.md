@@ -1,6 +1,6 @@
 # ytAnalyticsR
 
-The API wrapper library is used for the YouTube Analytics and Reporting APIs.
+This API wrapper library is used for the YouTube Analytics and Reporting APIs.
 
 ## R Client for the YouTube Analytics and Reporting APIs
 

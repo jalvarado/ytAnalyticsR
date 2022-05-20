@@ -4,3 +4,4 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^\.httr-oauth$
+^data-raw$
