@@ -4,17 +4,40 @@
 \alias{yt_auth}
 \title{Authenticate with the YouTube API}
 \usage{
-yt_auth()
+yt_auth(
+  email = NULL,
+  scopes = c("https://www.googleapis.com/auth/youtube",
+    "https://www.googleapis.com/auth/youtube.readonly",
+    "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+    "https://www.googleapis.com/auth/yt-analytics.readonly"),
+  cache = gargle::gargle_oauth_cache()
+)
+}
+\arguments{
+\item{email}{An existing cached email to authenticate with.}
+
+\item{scopes}{Scopes to use in the API requests}
+
+\item{cache}{Where to store the authentication tokens}
 }
 \value{
-Invisibly, the token that has been saved to the session
+an OAuth token object.
 }
 \description{
-A wrapper for googleAuthR::gar_auth
+Authenticate with the YouTube API
 }
-\details{
-If you have set the environment variable \code{YT_AUTH_FILE} to a valid file location,
-the function will look there for authentication details.
-Otherwise it will look in the working directory for hte '.httr-oauth' file, whicih if not present
-will trigger an authentication flow via Google login screen in your browser.
+\examples{
+\dontrun {
+# starts the auth process with default options
+yt_auth()
+
+# switch between cached authentication credentials
+# by providing an email cache key.
+# The first time you use the new scope you will go through the regular
+# authentication flow.  Subsequent calls with automatically authenticate.
+yt_auth(email = "your@email.com")
+
+# ... query the YouTube Analytics API ...
+}
+
 }
