@@ -26,18 +26,3 @@ an OAuth token object.
 \description{
 Authenticate with the YouTube API
 }
-\examples{
-\dontrun {
-# starts the auth process with default options
-yt_auth()
-
-# switch between cached authentication credentials
-# by providing an email cache key.
-# The first time you use the new scope you will go through the regular
-# authentication flow.  Subsequent calls with automatically authenticate.
-yt_auth(email = "your@email.com")
-
-# ... query the YouTube Analytics API ...
-}
-
-}
