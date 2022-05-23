@@ -1,0 +1,47 @@
+---
+title: "getting_started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{getting_started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Getting Started With ytAnalyticsR
+
+This vignette goes through the basic steps necessary to start using the
+_ytanalyticsr_ package.
+
+## Basic Setup
+
+As the _ytanalyticsr_ package interacts with the YouTube Analytics and Reporting
+APIs, you must first create the required resources within the Google developer
+console using the following steps:
+
+1. Create a new [Google Console](https://console.cloud.google.com/) project or select an existing one.
+2. Enable the YouTube Analytics and Reporting APIs
+3. Create and configure a new [OAuth application](https://support.google.com/googleapi/answer/6158849?hl=en) for the project.
+
+### 1. Create a New Google Console Project
+
+The Google developer console is used to manage access to all Google APIs,a s well
+as provide information as to how that APIs access is being used.
+
+In order to create a new project in the developer console you must:
+
+1. Navigate to the [Google Cloud Console](https://console.cloud.google.com)
+2. At the top-left, click "Menu" -> "IAM & Admin" -> "Create a Project"
+3. Enter a project name, select an organization and location, and click "Create"
+
+A project name can only contain letters, numbers, single quotes, hyphens, spaces,
+or exclamation points, and must be between 4 and 30 characters.
+
+In order to create a new project, you must have the `resourcemanager.projects.create`
+permission.
