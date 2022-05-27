@@ -40,12 +40,10 @@ playlists.query <- function(playlist_id, start_date = NULL,
     metrics = metrics, filters = all_filters, startDate = start_date,
     endDate = end_date, dimensions = dimensions, sort = sort, ids = ids
   )
-  r <- do.call(reports.query, rmNullObs(api_args))
-
-  df <- response_to_data_frame(r)
+  df <- do.call(reports.query, rmNullObs(api_args))
 
   if (nrow(df) == 0) {
-    df$playlist_id <- character()
+    df["playlist_id"] <- NA
   } else {
     df["playlist_id"] <- playlist_id
   }

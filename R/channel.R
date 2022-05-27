@@ -17,23 +17,17 @@
 channel.query <- function(channel_id, start_date = NULL, end_date = NULL,
                           metrics = NULL, dimensions = NULL, sort = NULL,
                           filters = NULL, max_results = NULL) {
-  if (missing(channel_id)) {
-    stop("channel_id is required")
-  }
 
-  api_args <- list(
-    ids = paste0("channel==", channel_id),
+  reports.query(
     startDate = start_date,
     endDate = end_date,
     metrics = metrics,
     dimensions = dimensions,
     sort = sort,
     filters = filters,
-    maxResults = max_results
+    maxResults = max_results,
+    ids = paste0("channel==", channel_id)
   )
-
-  r <- do.call(reports.query, rmNullObs(api_args))
-  response_to_data_frame(r)
 }
 
 #' Query the Analytics API for channel demographics metrics

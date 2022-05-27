@@ -28,3 +28,5 @@ response_to_data_frame <- function(r) {
 
   df
 }
+
+is_string <- function(x) length(x) == 1L && is.character(x)
