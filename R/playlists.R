@@ -42,10 +42,13 @@ playlists.query <- function(playlist_id, start_date = NULL,
   )
   df <- do.call(reports.query, rmNullObs(api_args))
 
-  if (nrow(df) == 0) {
-    df["playlist_id"] <- NA
+
+  if (nrow(df) > 0) {
+    df$playlist_id <- playlist_id
   } else {
-    df["playlist_id"] <- playlist_id
+    col_names <- colnames(df)
+    df <- data.frame(matrix(ncol = (ncol(df) + 1), nrow = 0))
+    colnames(df) <- c(col_names, "playlist_id")
   }
 
   df

@@ -18,14 +18,13 @@ rmNullObs <- function(x) {
 }
 
 response_to_data_frame <- function(r) {
+  headers <- lapply(r$columnHeaders, `[[`, "name")
   if (length(r$rows) == 0) {
-    df <- data.frame(matrix(ncol = length(c(r$columnHeaders$name)), nrow = 0))
-    colnames(df) <- c(r$columnHeaders$name)
+    df <- data.frame(matrix(ncol = length(headers), nrow = 0))
   } else {
-    df <- as.data.frame(r$rows)
-    colnames(df) <- c(r$columnHeaders$name)
+    df <- as.data.frame(do.call(rbind, r$rows))
   }
-
+  colnames(df) <- headers
   df
 }
 

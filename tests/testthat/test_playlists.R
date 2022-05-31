@@ -2,32 +2,16 @@ library(testthat)
 library(ytAnalyticsR)
 
 test_that("Response rows are converted to dataframe rows", {
-  response_str <- '{
-    "kind": "youtubeAnalytics#resultTable",
-    "columnHeaders": [
-      {
-        "name": "views",
-        "dataType": "STRING",
-        "columnType": "METRIC"
-      },
-      {
-        "name": "day",
-        "dataType": "STRING",
-        "columnType": "DIMENSION"
-      }
-    ],
-    "rows": [
-      ["foo", "bar"],
-      ["row2", "fake_data"]
-    ]
-  }'
-  api_response <- jsonlite::fromJSON(response_str)
-  mockery::stub(playlists.query, "reports.query", api_response)
+  query_results <- data.frame(
+    day = c("2022-01-01", "2022-01-02"),
+    views = c("1", "12")
+  )
+  mockery::stub(playlists.query, "reports.query", query_results)
 
   playlist_id <- "fake_playlist_id"
   playlist_metrics <- playlists.query(playlist_id,
     start_date = "2022-01-01",
-    end_date = "2022-04-30",
+    end_date = "2022-01-02",
     metrics = "views",
     dimensions = "day",
     sort = "day"
@@ -37,32 +21,15 @@ test_that("Response rows are converted to dataframe rows", {
 })
 
 test_that("playlist_id is added to the dataframe", {
-  # Empty API response
-  response_str <- '{
-    "kind": "youtubeAnalytics#resultTable",
-    "columnHeaders": [
-      {
-        "name": "views",
-        "dataType": "STRING",
-        "columnType": "METRIC"
-      },
-      {
-        "name": "day",
-        "dataType": "STRING",
-        "columnType": "DIMENSION"
-      }
-    ],
-    "rows": [
-      [1, "2022-04-01"],
-      [2, "2022-04-02"]
-    ]
-  }'
-  api_response <- jsonlite::fromJSON(response_str)
-  mockery::stub(playlists.query, "reports.query", api_response)
+  query_results <- data.frame(
+    day = c("2022-01-01", "2022-01-02"),
+    views = c("1", "12")
+  )
+  mockery::stub(playlists.query, "reports.query", query_results)
 
   playlist_args <- list(
     start_date = "2022-01-01",
-    end_date = "2022-04-30",
+    end_date = "2022-01-02",
     metrics = "views",
     dimensions = "day",
     sort = "day"
@@ -71,8 +38,8 @@ test_that("playlist_id is added to the dataframe", {
   playlist_metrics <- do.call(playlists.query, c(playlist_id, playlist_args))
 
   expected_df <- data.frame(
-    views = c("1", "2"),
-    day = c("2022-04-01", "2022-04-02"),
+    day = c("2022-01-01", "2022-01-02"),
+    views = c("1", "12"),
     playlist_id = c(playlist_id, playlist_id)
   )
 
@@ -80,29 +47,13 @@ test_that("playlist_id is added to the dataframe", {
 })
 
 test_that("Response column headers are mapped to column names", {
-  # Empty API response
-  response_str <- '{
-    "kind": "youtubeAnalytics#resultTable",
-    "columnHeaders": [
-      {
-        "name": "views",
-        "dataType": "STRING",
-        "columnType": "METRIC"
-      },
-      {
-        "name": "day",
-        "dataType": "STRING",
-        "columnType": "DIMENSION"
-      }
-    ],
-    "rows": []
-  }'
-  api_response <- jsonlite::fromJSON(response_str)
-  mockery::stub(playlists.query, "reports.query", api_response)
+  query_results <- data.frame(matrix(ncol = 2, nrow = 0))
+  colnames(query_results) <- c("day", "views")
+  mockery::stub(playlists.query, "reports.query", query_results)
 
   playlist_args <- list(
     start_date = "2022-01-01",
-    end_date = "2022-04-30",
+    end_date = "2022-01-02",
     metrics = "views",
     dimensions = "day",
     sort = "day"
@@ -111,32 +62,16 @@ test_that("Response column headers are mapped to column names", {
   playlist_metrics <- do.call(playlists.query, c(playlist_id, playlist_args))
 
   testthat::expect_equal(
-    c("views", "day", "playlist_id"),
-    colnames(playlist_metrics)
+    colnames(playlist_metrics),
+    c("day", "views", "playlist_id")
   )
   testthat::expect_equal(nrow(playlist_metrics), 0)
 })
 
 test_that("An empty API response results in an empty data.frame", {
-  # Empty API response
-  response_str <- '{
-    "kind": "youtubeAnalytics#resultTable",
-    "columnHeaders": [
-      {
-        "name": "views",
-        "dataType": "STRING",
-        "columnType": "METRIC"
-      },
-      {
-        "name": "day",
-        "dataType": "STRING",
-        "columnType": "DIMENSION"
-      }
-    ],
-    "rows": []
-  }'
-  api_response <- jsonlite::fromJSON(response_str)
-  mockery::stub(playlists.query, "reports.query", api_response)
+  query_results <- data.frame(matrix(ncol = 2, nrow = 0))
+  colnames(query_results) <- c("day", "views")
+  mockery::stub(playlists.query, "reports.query", query_results)
 
   playlist_args <- list(
     start_date = "2022-01-01",

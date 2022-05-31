@@ -16,27 +16,11 @@ test_that("channel.query calls reports.query", {
 })
 
 test_that("channel.query returns a data.frame", {
-  response_str <- '{
-    "kind": "youtubeAnalytics#resultTable",
-    "columnHeaders": [
-      {
-        "name": "views",
-        "dataType": "STRING",
-        "columnType": "METRIC"
-      },
-      {
-        "name": "day",
-        "dataType": "STRING",
-        "columnType": "DIMENSION"
-      }
-    ],
-    "rows": [
-      ["1", "2022-01-01"],
-      ["12", "2022-01-02"]
-    ]
-  }'
-  api_response <- jsonlite::fromJSON(response_str)
-  mockery::stub(channel.query, "reports.query", api_response)
+  query_results <- data.frame(
+    day = c("2022-01-01", "2022-01-02"),
+    views = c("1", "12")
+  )
+  mockery::stub(channel.query, "reports.query", query_results)
 
   response <- channel.query("fake_channel_1",
     start_date = "2022-01-01",
@@ -52,24 +36,11 @@ test_that("channel.query returns a data.frame", {
 })
 
 test_that("channel.query handles an empty API response", {
-  response_str <- '{
-    "kind": "youtubeAnalytics#resultTable",
-    "columnHeaders": [
-      {
-        "name": "views",
-        "dataType": "STRING",
-        "columnType": "METRIC"
-      },
-      {
-        "name": "day",
-        "dataType": "STRING",
-        "columnType": "DIMENSION"
-      }
-    ],
-    "rows": []
-  }'
-  api_response <- jsonlite::fromJSON(response_str)
-  mockery::stub(channel.query, "reports.query", api_response)
+  query_results <- data.frame(
+    day = c(),
+    views = c()
+  )
+  mockery::stub(channel.query, "reports.query", query_results)
 
   response <- channel.query("fake_channel_1",
     start_date = "2022-01-01",
@@ -81,7 +52,7 @@ test_that("channel.query handles an empty API response", {
 
   expect_s3_class(response, "data.frame")
   expect_equal(nrow(response), 0)
-  expect_equal(response$views, vector())
+  expect_equal(response$views, c())
 })
 
 test_that("channel.demographics calls channel.query", {

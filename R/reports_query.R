@@ -18,9 +18,5 @@ reports.query <- function(metrics = NULL, filters = NULL, ids = NULL,
   )
   resp <- gargle::response_process(make_request(req))
 
-  headers <- lapply(resp$columnHeaders, `[[`, "name")
-  df <- as.data.frame(do.call(rbind, resp$rows))
-  colnames(df) <- headers
-
-  return(df)
+  response_to_data_frame(resp)
 }
