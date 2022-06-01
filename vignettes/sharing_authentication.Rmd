@@ -1,0 +1,85 @@
+---
+title: "sharing_authentication"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sharing_authentication}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Sharing OAuth Tokens
+
+Share OAuth authentication tokens between _tuber_ and _ytAnalyticsR_.
+
+_ytAnalyticsR_ uses _gargle_ for the authentication backend, while _tuber_ uses
+basic _httr_ to implement a custom OAuth 2.0 flow.
+
+_gargle_ supports passing an OAuth 2.0 Token to the `fetch_token` function which
+will use the supplied token instead of fetching a new one from the Google
+OAuth app endpoint.
+
+```{r setup}
+```
+
+After creating the `google_token` and setting the _tuber_ authentication token
+option.  We can call the _tuber_ functions and query the YouTube Data API using
+the created OAuth 2.0 token.
+
+``` {r}
+library(tidyverse)
+library(tuber)
+library(httr)
+
+youtube_oauth_app <- function() {
+  httr::oauth_app(
+    appname = "ytAnalyticsR",
+    key = "GOOGLE_OAUTH_APP_CLIENT_ID",
+    secret = "GOOGLE_OAUTH_APP_CLIENT_SECRET"
+  )
+}
+
+# ===== Create an httr oauth 2 token =====
+google_token <- httr::oauth2.0_token(
+  httr::oauth_endpoints("google"),
+  youtube_oauth_app(),
+  scope = c(
+    "https://www.googleapis.com/auth/youtube",
+    "https://www.googleapis.com/auth/yt-analytics.readonly"
+  )
+)
+
+# ===== Set the created httr token as the default token for tubeR =====
+options(google_token = google_token)
+
+# ===== Query the YouTube Data API using tubeR =====
+playlists <- tuber::get_playlists(
+  filter = c(channel_id = "UCA9imiVZhttaq8hMfsrY0Gg")
+)
+
+playlist_df <- tibble(playlist = playlists$item) %>%
+  unnest_wider(playlist) %>%
+  unnest_wider(snippet)
+
+print(playlist_df)
+
+# ===== Provide the same httr token to gargle for use in ytAnalyticsR =====
+yt_analytics_auth(token = google_token)
+
+df <- channel.query("MINE",
+  start_date = "2022-04-01",
+  end_date = "2022-04-30",
+  metrics = "views,likes,dislikes",
+  dimensions = "day",
+  sort = "day"
+)
+print(df)
+```
+
+

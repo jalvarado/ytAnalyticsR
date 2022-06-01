@@ -17,7 +17,6 @@
 channel.query <- function(channel_id, start_date = NULL, end_date = NULL,
                           metrics = NULL, dimensions = NULL, sort = NULL,
                           filters = NULL, max_results = NULL) {
-
   reports.query(
     startDate = start_date,
     endDate = end_date,

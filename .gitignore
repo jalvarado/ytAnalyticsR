@@ -6,3 +6,4 @@ renv/
 .Rprofile
 gar_parse_error.rds
 renv.lock
+inst/doc
