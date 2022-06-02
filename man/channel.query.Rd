@@ -11,7 +11,8 @@ channel.query(
   metrics = NULL,
   dimensions = NULL,
   sort = NULL,
-  filters = NULL
+  filters = NULL,
+  max_results = NULL
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ dimension names with '-' to sort that dimension in descending order}
 
 \item{filters}{Semi-colon seperated string of filter conditions to apply
 to the result set.}
+
+\item{max_results}{Maximum number of results to return. (default 1000)}
 
 \item{dimensiosn}{Comma-seperated string of dimension names}
 }

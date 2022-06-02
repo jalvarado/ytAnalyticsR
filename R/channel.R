@@ -9,17 +9,17 @@
 #' dimension names with '-' to sort that dimension in descending order
 #' @param filters Semi-colon seperated string of filter conditions to apply
 #' to the result set.
+#' @param max_results Maximum number of results to return. (default 1000)
 #'
 #' @return data.frame containing the API response rows
 #'
 #' @export
 channel.query <- function(channel_id, start_date = NULL, end_date = NULL,
                           metrics = NULL, dimensions = NULL, sort = NULL,
-                          filters = NULL) {
+                          filters = NULL, max_results = NULL) {
   if (missing(channel_id)) {
     stop("channel_id is required")
   }
-  assertthat::assert_that(is.character(channel_id))
 
   api_args <- list(
     ids = paste0("channel==", channel_id),
@@ -28,7 +28,8 @@ channel.query <- function(channel_id, start_date = NULL, end_date = NULL,
     metrics = metrics,
     dimensions = dimensions,
     sort = sort,
-    filters = filters
+    filters = filters,
+    maxResults = max_results
   )
 
   r <- do.call(reports.query, rmNullObs(api_args))

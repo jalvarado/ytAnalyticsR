@@ -10,9 +10,10 @@ Depends:
 Encoding: UTF-8
 LazyData: true
 Imports:
-  googleAuthR (>= 2.0.0)
+  googleAuthR (>= 2.0.0),
+  jsonlite (>= 1.8.0)
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Suggests:
     testthat (>= 3.0.0),
     webmockr (>= 0.8.0),
