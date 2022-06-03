@@ -29,12 +29,13 @@ test_that("it handles an empty response", {
   }
   '
   stub_request("get",
-  uri_regex = "https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DMINE&endDate=2022-01-01&dimensions=day&metrics=views&startDate=2022-01-01") %>%
+    uri_regex = "https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DMINE&endDate=2022-01-01&dimensions=day&metrics=views&startDate=2022-01-01"
+  ) %>%
     to_return(
       body = empty_body,
       status = 200,
       headers = list(
-        'content-type' = 'application/json'
+        "content-type" = "application/json"
       )
     )
 
@@ -75,12 +76,13 @@ test_that("it converts the response rows to a data.frame", {
   }
   '
   stub_request("get",
-  uri_regex = "https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DMINE&endDate=2022-01-02&dimensions=day&metrics=views&startDate=2022-01-01") %>%
+    uri_regex = "https://youtubeanalytics.googleapis.com/v2/reports?ids=channel%3D%3DMINE&endDate=2022-01-02&dimensions=day&metrics=views&startDate=2022-01-01"
+  ) %>%
     to_return(
       body = empty_body,
       status = 200,
       headers = list(
-        'content-type' = 'application/json'
+        "content-type" = "application/json"
       )
     )
 
