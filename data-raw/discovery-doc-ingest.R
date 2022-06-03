@@ -49,6 +49,3 @@ mediafy <- function(target_id, methods) {
 .endpoints <- methods
 
 attr(.endpoints, "base_url") <- dd$rootUrl
-# View(.endpoints)
-
-usethis::use_data(.endpoints, internal = TRUE, overwrite = TRUE)
