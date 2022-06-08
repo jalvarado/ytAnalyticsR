@@ -9,7 +9,6 @@ make_request <- function(x, ..., user_agent = gargle_user_agent()) {
 yt_analytics_ua <- function() {
   httr::user_agent(paste0(
     "ytAnalyticsR/", utils::packageVersion("ytAnalyticsR"), " ",
-    "(GPN:RStudio; )", " ",
     "gargle/", utils::packageVersion("gargle"), " ",
     "httr/", utils::packageVersion("httr")
   ))

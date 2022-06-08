@@ -7,9 +7,10 @@ httr_mock()
 
 options("gargle_oauth_email" = TRUE)
 
-
 test_that("it handles an empty response", {
+  skip_if_no_auth()
   stub_registry_clear()
+
   empty_body <- '
   {
     "kind": "youtubeAnalytics#resultTable",
@@ -53,6 +54,7 @@ test_that("it handles an empty response", {
 })
 
 test_that("it converts the response rows to a data.frame", {
+  skip_if_no_auth()
   stub_registry_clear()
   empty_body <- '
   {

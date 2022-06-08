@@ -19,6 +19,7 @@ Suggests:
     webmockr (>= 0.8.0),
     mockery (>= 0.4.3),
     knitr,
-    rmarkdown
+    rmarkdown,
+    sodium
 Config/testthat/edition: 3
 VignetteBuilder: knitr
