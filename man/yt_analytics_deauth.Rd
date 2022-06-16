@@ -2,10 +2,10 @@
 % Please edit documentation in R/auth.R
 \name{yt_analytics_deauth}
 \alias{yt_analytics_deauth}
-\title{remove any existing credentials for the current session.}
+\title{Remove any existing credentials for the current session.}
 \usage{
 yt_analytics_deauth()
 }
 \description{
-remove any existing credentials for the current session.
+Remove any existing credentials for the current session.
 }

@@ -1,0 +1,13 @@
+#' Get all videos in the given playlist
+#'
+#' @param playlist_id Character containing the YouTube playlist ID.
+#' @param ... Additional arguments passed to \code{tuber::get_playlist_items}
+#'
+#' @importFrom tuber get_playlist_items
+#' @export
+get_playlist_videos <- function(playlist_id, ...) {
+  tuber::get_playlist_items(
+    filter = c(playlist_id = playlist_id),
+    ...
+  )
+}
