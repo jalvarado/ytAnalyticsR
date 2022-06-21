@@ -1,14 +1,20 @@
 #' Search YouTube for a playlist
 #'
-#' @param channel_id Character containing the YouTube channel ID
+#' @param channel_id Character containing the YouTube channel ID. Used to limit
+#' the search results to only playlists belonging to the specified channel.
+#' @param title Character containing a playlist title to search for.  Will
+#' only return exact matches and is case-sensitive.  Either \code{title} or
+#' \code{q} parameter is retuired, but not both.
 #' @param q Search term used to filter playlists by title.  Takes any regular
 #' expression supported by \code{grepl}. Optional.
 #' @param ... Additional parameters passed to \code{tuber::get_playlists}
 #'
-#' @importFrom dplyr tibble
+#' @importFrom dplyr tibble %>%
 #' @importFrom tidyr unnest_wider
 #'
-#' @seealso tuber::get_playlists
+#' @seealso [tuber::get_playlists()] for additional parameters
+#' @seealso [grepl()] for regular expression requirements in the \code{q}
+#' parameter
 #'
 #' @export
 find_playlist <- function(channel_id = NULL,
