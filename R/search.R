@@ -18,8 +18,19 @@
 #'
 #' @export
 find_playlist <- function(channel_id = NULL,
+                          title = NULL,
                           q = NULL,
                           ...) {
+  # Either `title` or `q` must be provided.
+  if (is.null(title) && is.null(q)) {
+    stop("Either `title` or `q` must be provided, but not both.")
+  }
+
+  if (!is.null(title) && !is.null(q)) {
+    stop("Either `title or `q` must be provided, but not both.")
+  }
+
+
   # Check if we have authenticated with tubeR already
   if (!tuber::yt_authorized()) {
     print("No OAuth token found.  Please authorize using `yt_analytics_auth`.")

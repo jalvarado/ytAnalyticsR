@@ -4,12 +4,7 @@
 \alias{channel.demographics}
 \title{Query the Analytics API for channel demographics metrics}
 \usage{
-channel.demographics(
-  channel_id,
-  start_date = NULL,
-  end_date = NULL,
-  filters = NULL
-)
+channel.demographics(channel_id, start_date = NULL, end_date = NULL)
 }
 \arguments{
 \item{channel_id}{YouTube channel ID}

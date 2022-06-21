@@ -24,6 +24,8 @@ channel.query(
 
 \item{metrics}{Comma-seperated string of metric names}
 
+\item{dimensions}{Comma-seperated string of dimension names}
+
 \item{sort}{Comma-seperated string of dimension names to sort by.  Prepend
 dimension names with '-' to sort that dimension in descending order}
 
@@ -31,8 +33,6 @@ dimension names with '-' to sort that dimension in descending order}
 to the result set.}
 
 \item{max_results}{Maximum number of results to return. (default 1000)}
-
-\item{dimensiosn}{Comma-seperated string of dimension names}
 }
 \value{
 data.frame containing the API response rows

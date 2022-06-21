@@ -4,10 +4,18 @@
 \alias{find_playlist}
 \title{Search YouTube for a playlist}
 \usage{
-find_playlist(channel_id = NULL, q = NULL, ...)
+find_playlist(channel_id = NULL, title = NULL, q = NULL, ...)
 }
 \arguments{
-\item{channel_id}{Character containing the YouTube channel ID}
+\item{channel_id}{Character containing the YouTube channel ID. Used to limit
+the search results to only playlists belonging to the specified channel.}
+
+\item{title}{Character containing a playlist title to search for.  Will
+only return exact matches and is case-sensitive.  Either \code{title} or
+\code{q} parameter is retuired, but not both.}
+
+\item{q}{Search term used to filter playlists by title.  Takes any regular
+expression supported by \code{grepl}. Optional.}
 
 \item{...}{Additional parameters passed to \code{tuber::get_playlists}}
 }
@@ -15,5 +23,8 @@ find_playlist(channel_id = NULL, q = NULL, ...)
 Search YouTube for a playlist
 }
 \seealso{
-tuber::get_playlists
+\code{\link[tuber:get_playlists]{tuber::get_playlists()}} for additional parameters
+
+\code{\link[=grepl]{grepl()}} for regular expression requirements in the \code{q}
+parameter
 }
