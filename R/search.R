@@ -26,12 +26,12 @@ find_playlist <- function(channel_id = NULL,
   print(next_page_token)
 
   results <- tibble(data = data$items) %>%
-    unnest_wider(data) %>%
-    unnest_wider(snippet) %>%
-    unnest_wider(id, names_sep = ".")
+    unnest_wider("data") %>%
+    unnest_wider("snippet") %>%
+    unnest_wider("id", names_sep = ".")
 
   # Paginate through the API responses
-  while (!is.null(next_page_token)) {
+  while (is.character(next_page_token)) {
     print(paste0("Fetching page: ", next_page_token))
     data <- tuber::get_playlists(
       filter = c(channel_id = channel_id),
@@ -40,9 +40,9 @@ find_playlist <- function(channel_id = NULL,
     next_page_token <- data$nextPageToken
 
     df <- tibble(data = data$items) %>%
-      unnest_wider(data) %>%
-      unnest_wider(snippet) %>%
-      unnest_wider(id, names_sep = ".")
+      unnest_wider("data") %>%
+      unnest_wider("snippet") %>%
+      unnest_wider("id", names_sep = ".")
 
     results <- rbind(results, df)
   }

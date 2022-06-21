@@ -4,7 +4,7 @@
 #' @param start_date Beginning date of the query date range
 #' @param end_date End date of the query date range
 #' @param metrics Comma-seperated string of metric names
-#' @param dimensiosn Comma-seperated string of dimension names
+#' @param dimensions Comma-seperated string of dimension names
 #' @param sort Comma-seperated string of dimension names to sort by.  Prepend
 #' dimension names with '-' to sort that dimension in descending order
 #' @param filters Semi-colon seperated string of filter conditions to apply
@@ -39,8 +39,8 @@ channel.query <- function(channel_id, start_date = NULL, end_date = NULL,
 #'
 #' @export
 channel.demographics <- function(channel_id,
-                                 start_date = NULL, end_date = NULL,
-                                 filters = NULL) {
+                                 start_date = NULL,
+                                 end_date = NULL) {
   api_args <- list(
     start_date = start_date,
     end_date = end_date,

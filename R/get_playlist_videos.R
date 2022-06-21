@@ -4,6 +4,8 @@
 #' @param ... Additional arguments passed to \code{tuber::get_playlist_items}
 #'
 #' @importFrom tuber get_playlist_items
+#'
+#' @seealso [tuber::get_playlist_items()] for additional arguments
 #' @export
 get_playlist_videos <- function(playlist_id, ...) {
   tuber::get_playlist_items(
