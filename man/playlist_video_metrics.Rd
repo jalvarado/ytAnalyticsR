@@ -20,6 +20,8 @@ playlist_video_metrics(
 
 \item{end_date}{Character containing the end date string. "YYYY-MM-DD"}
 
+\item{playlist_title}{Character playlist title. Optional}
+
 \item{metrics}{Character comma-separated list of metrics to fetch.}
 
 \item{dimensions}{Character comma-separated list of dimensions.}

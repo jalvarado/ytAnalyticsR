@@ -9,16 +9,18 @@ vvideo.demographics(video_ids, ...)
 \arguments{
 \item{video_ids}{vector of YouTube video id strings}
 
-\item{filters}{string of semi-colon separated filters to apply to the query}
-
-\item{start_date}{date string in 'YYYY-mm-dd' format}
-
-\item{end_Date}{date string in 'YYYY-mm-dd' format}
-
-\item{sort}{string of comma separated list of dimensions to sort by.  Prepend
+\item{...}{
+  Arguments passed on to \code{\link[=video.query]{video.query}}
+  \describe{
+    \item{\code{metrics}}{string of comma separated metric names to query}
+    \item{\code{dimensions}}{string of comma separated dimenension names}
+    \item{\code{filters}}{string of semi-colon separated filters to apply to the query}
+    \item{\code{start_date}}{date string in 'YYYY-mm-dd' format}
+    \item{\code{end_date}}{date string in 'YYYY-mm-dd' format}
+    \item{\code{sort}}{string of comma separated list of dimensions to sort by.  Prepend
 the dimension name with '-' to sort descending}
-
-\item{ids}{string of semi-colon separated id terms.  i.e. 'channel==MINE'}
+    \item{\code{ids}}{string of semi-colon separated id terms.  i.e. 'channel==MINE'}
+  }}
 }
 \value{
 data.frame
@@ -26,3 +28,7 @@ data.frame
 \description{
 Query the Analytics API and retrieve metrics for the given video ids
 }
+\seealso{
+\code{\link[=video.query]{video.query()}}
+}
+\concept{videos}

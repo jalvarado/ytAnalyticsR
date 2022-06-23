@@ -9,7 +9,21 @@ get_playlist_videos(playlist_id, ...)
 \arguments{
 \item{playlist_id}{Character containing the YouTube playlist ID.}
 
-\item{...}{Additional arguments passed to \code{tuber::get_playlist_items}}
+\item{...}{
+  Arguments passed on to \code{\link[tuber:get_playlist_items]{tuber::get_playlist_items}}
+  \describe{
+    \item{\code{part}}{Required. Comma separated string including one or more of the
+following: \code{contentDetails, id, snippet, status}. Default:
+\code{contentDetails}.}
+    \item{\code{max_results}}{Maximum number of items that should be returned.
+Integer. Optional. Default is 50.
+If over 50, all the results are returned.}
+    \item{\code{video_id}}{Optional. request should return only the playlist
+items that contain the specified video.}
+    \item{\code{page_token}}{specific page in the result set that should be
+returned, optional}
+    \item{\code{simplify}}{returns a data.frame rather than a list.}
+  }}
 }
 \description{
 Get all videos in the given playlist

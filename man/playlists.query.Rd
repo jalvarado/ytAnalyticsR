@@ -41,3 +41,9 @@ data.frame containing the API response rows.
 \description{
 The playlist ID will be added as a dimension to the returned data.frame.
 }
+\seealso{
+Other playlists: 
+\code{\link{playlist.demographics}()},
+\code{\link{vplaylist.query}()}
+}
+\concept{playlists}

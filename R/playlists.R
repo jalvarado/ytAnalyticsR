@@ -15,6 +15,7 @@
 #'  query for data
 #'
 #' @return data.frame containing the API response rows.
+#' @family playlists
 #'
 #' @export
 playlists.query <- function(playlist_id, start_date = NULL,
@@ -57,20 +58,12 @@ playlists.query <- function(playlist_id, start_date = NULL,
 #' Take a vector of playlist ids and call playlists.query for each.
 #'
 #' @param playlist_ids vector of YouTube Playlist ID strings
-#' @param start_date Beginning date of the query date range.
-#' @param end_date End date of the query date range.
-#' @param metrics Comma seperated string of requested metrics.
-#' @param dimensions Comma seperated string of requested dimensions.
-#' @param sort Comma seperated string of dimensions to sort by.  Prepend
-#'  dimension name with '-' to indicate a descending sort.
-#' @param filters semi-colon seperated string of filter conditions to apply
-#'  to the result set.
-#' @param ids ID string used to determine which channel or content owner to
-#'  query for data
-#'
-#' @return data.frame containing the API response rows.
+#' @inheritDotParams playlists.query -playlist_id
 #'
 #' @return data.frame containing the results from all queries
+#'
+#' @seealso [playlists.query()]
+#' @family playlists
 #'
 #' @export
 vplaylist.query <- function(playlist_ids, ...) {
@@ -91,6 +84,7 @@ vplaylist.query <- function(playlist_ids, ...) {
 #' @param end_date End date of the query date range.
 #'
 #' @return DataFrame
+#' @family playlists
 #'
 #' @export
 playlist.demographics <- function(playlist_id, start_date = NULL,

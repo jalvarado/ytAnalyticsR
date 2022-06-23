@@ -9,28 +9,32 @@ vplaylist.query(playlist_ids, ...)
 \arguments{
 \item{playlist_ids}{vector of YouTube Playlist ID strings}
 
-\item{start_date}{Beginning date of the query date range.}
-
-\item{end_date}{End date of the query date range.}
-
-\item{metrics}{Comma seperated string of requested metrics.}
-
-\item{dimensions}{Comma seperated string of requested dimensions.}
-
-\item{sort}{Comma seperated string of dimensions to sort by.  Prepend
+\item{...}{
+  Arguments passed on to \code{\link[=playlists.query]{playlists.query}}
+  \describe{
+    \item{\code{start_date}}{Beginning date of the query date range.}
+    \item{\code{end_date}}{End date of the query date range.}
+    \item{\code{metrics}}{Comma seperated string of requested metrics.}
+    \item{\code{dimensions}}{Comma seperated string of requested dimensions.}
+    \item{\code{sort}}{Comma seperated string of dimensions to sort by.  Prepend
 dimension name with '-' to indicate a descending sort.}
-
-\item{filters}{semi-colon seperated string of filter conditions to apply
+    \item{\code{filters}}{semi-colon seperated string of filter conditions to apply
 to the result set.}
-
-\item{ids}{ID string used to determine which channel or content owner to
+    \item{\code{ids}}{ID string used to determine which channel or content owner to
 query for data}
+  }}
 }
 \value{
-data.frame containing the API response rows.
-
 data.frame containing the results from all queries
 }
 \description{
 Take a vector of playlist ids and call playlists.query for each.
 }
+\seealso{
+\code{\link[=playlists.query]{playlists.query()}}
+
+Other playlists: 
+\code{\link{playlist.demographics}()},
+\code{\link{playlists.query}()}
+}
+\concept{playlists}

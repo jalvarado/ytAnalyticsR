@@ -24,14 +24,14 @@ video.query(
 
 \item{start_date}{date string in 'YYYY-mm-dd' format}
 
+\item{end_date}{date string in 'YYYY-mm-dd' format}
+
 \item{dimensions}{string of comma separated dimenension names}
 
 \item{sort}{string of comma separated list of dimensions to sort by.  Prepend
 the dimension name with '-' to sort descending}
 
 \item{ids}{string of semi-colon separated id terms.  i.e. 'channel==MINE'}
-
-\item{end_Date}{date string in 'YYYY-mm-dd' format}
 }
 \value{
 data.frame

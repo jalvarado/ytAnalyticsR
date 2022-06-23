@@ -1,5 +1,7 @@
 #' Make an API request to a Google API
 #'
+#' @inheritParams gargle::request_make
+#'
 #' @family requests
 #' @export
 make_request <- function(x, ..., user_agent = yt_analytics_ua()) {

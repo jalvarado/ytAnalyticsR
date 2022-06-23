@@ -19,3 +19,9 @@ DataFrame
 \description{
 Query the Analytics API for playlist demographics metrics
 }
+\seealso{
+Other playlists: 
+\code{\link{playlists.query}()},
+\code{\link{vplaylist.query}()}
+}
+\concept{playlists}

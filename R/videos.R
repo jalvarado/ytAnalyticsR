@@ -5,7 +5,7 @@
 #' @param dimensions string of comma separated dimenension names
 #' @param filters string of semi-colon separated filters to apply to the query
 #' @param start_date date string in 'YYYY-mm-dd' format
-#' @param end_Date date string in 'YYYY-mm-dd' format
+#' @param end_date date string in 'YYYY-mm-dd' format
 #' @param sort string of comma separated list of dimensions to sort by.  Prepend
 #'   the dimension name with '-' to sort descending
 #' @param ids string of semi-colon separated id terms.  i.e. 'channel==MINE'
@@ -86,16 +86,10 @@ video.demographics <- function(video_id, start_date, end_date,
 #' Query the Analytics API and retrieve metrics for the given video ids
 #'
 #' @param video_ids vector of YouTube video id strings
-#' @param metrics string of comma separated metric names to query
-#' @param dimensions string of comma separated dimenension names
-#' @param filters string of semi-colon separated filters to apply to the query
-#' @param start_date date string in 'YYYY-mm-dd' format
-#' @param end_Date date string in 'YYYY-mm-dd' format
-#' @param sort string of comma separated list of dimensions to sort by.  Prepend
-#'   the dimension name with '-' to sort descending
-#' @param ids string of semi-colon separated id terms.  i.e. 'channel==MINE'
+#' @inheritDotParams video.query -video_id
 #'
 #' @return data.frame
+#' @seealso [video.query()]
 #'
 #' @export
 vvideo.query <- function(video_ids, ...) {
@@ -111,14 +105,12 @@ vvideo.query <- function(video_ids, ...) {
 #' Query the Analytics API and retrieve metrics for the given video ids
 #'
 #' @param video_ids vector of YouTube video id strings
-#' @param filters string of semi-colon separated filters to apply to the query
-#' @param start_date date string in 'YYYY-mm-dd' format
-#' @param end_Date date string in 'YYYY-mm-dd' format
-#' @param sort string of comma separated list of dimensions to sort by.  Prepend
-#'   the dimension name with '-' to sort descending
-#' @param ids string of semi-colon separated id terms.  i.e. 'channel==MINE'
+#' @inheritDotParams video.query -video_id
 #'
 #' @return data.frame
+#' @seealso [video.query()]
+#'
+#' @family videos
 #'
 #' @export
 vvideo.demographics <- function(video_ids, ...) {

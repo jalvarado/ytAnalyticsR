@@ -1,6 +1,7 @@
 #' Get analytics data for all videos in the given playlist.
 #'
 #' @param playlist_id Character containig the YouTube playlist ID.
+#' @param playlist_title Character playlist title. Optional
 #' @param start_date Character containing the start date string. "YYYY-MM-DD"
 #' @param end_date Character containing the end date string. "YYYY-MM-DD"
 #' @param metrics Character comma-separated list of metrics to fetch.

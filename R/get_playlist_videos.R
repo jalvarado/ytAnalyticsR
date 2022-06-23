@@ -1,7 +1,7 @@
 #' Get all videos in the given playlist
 #'
 #' @param playlist_id Character containing the YouTube playlist ID.
-#' @param ... Additional arguments passed to \code{tuber::get_playlist_items}
+#' @inheritDotParams tuber::get_playlist_items -filter
 #'
 #' @importFrom tuber get_playlist_items
 #'
