@@ -46,9 +46,9 @@ find_playlists <- function(channel_id = NULL,
     )
 
     page_df <- dplyr::tibble(data = data$items) %>%
-      dplyr::unnest_wider("data") %>%
-      dplyr::unnest_wider("snippet") %>%
-      dplyr::unnest_wider("id", names_sep = ".")
+      tidyr::unnest_wider("data") %>%
+      tidyr::unnest_wider("snippet") %>%
+      tidyr::unnest_wider("id", names_sep = ".")
 
     results <- rbind(results, page_df)
 
