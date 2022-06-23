@@ -8,3 +8,5 @@ renv/
 gar_parse_error.rds
 renv.lock
 inst/doc
+
+examples/
