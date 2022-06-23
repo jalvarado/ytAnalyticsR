@@ -60,7 +60,14 @@ find_playlists <- function(channel_id = NULL,
   }
 
   # Filter the results based on the q parameter
+  if (!is.null(title) && is.character(title)) {
+    print(paste0("Filtering playlists based on title: ", title))
+    results <- results %>%
+      dplyr::filter(.data$title == .env$title)
+  }
+
   if (!is.null(q)) {
+    print(paste0("Filtering playlists using: ", q))
     results <- results %>%
       dplyr::filter(grepl(q, .data$title, ignore.case = TRUE) |
         grepl(q, .data$description, ignore.case = TRUE))
