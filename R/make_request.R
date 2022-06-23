@@ -2,8 +2,8 @@
 #'
 #' @family requests
 #' @export
-make_request <- function(x, ..., user_agent = gargle_user_agent()) {
-  gargle::request_make(x, ..., user_agent = yt_analytics_ua())
+make_request <- function(x, ..., user_agent = yt_analytics_ua()) {
+  gargle::request_make(x, ..., user_agent = user_agent)
 }
 
 yt_analytics_ua <- function() {

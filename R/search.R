@@ -1,4 +1,4 @@
-#' Search YouTube for a playlist
+#' Search for playlists matching the given criteria.
 #'
 #' @param channel_id Character containing the YouTube channel ID. Used to limit
 #' the search results to only playlists belonging to the specified channel.
@@ -17,7 +17,7 @@
 #' parameter
 #'
 #' @export
-find_playlist <- function(channel_id = NULL,
+find_playlists <- function(channel_id = NULL,
                           title = NULL,
                           q = NULL,
                           ...) {
@@ -37,38 +37,33 @@ find_playlist <- function(channel_id = NULL,
     yt_analytics_auth()
   }
 
-  data <- tuber::get_playlists(filter = c(channel_id = channel_id))
-
-  next_page_token <- data$nextPageToken
-  print(next_page_token)
-
-  results <- tibble(data = data$items) %>%
-    unnest_wider("data") %>%
-    unnest_wider("snippet") %>%
-    unnest_wider("id", names_sep = ".")
-
-  # Paginate through the API responses
-  while (is.character(next_page_token)) {
-    print(paste0("Fetching page: ", next_page_token))
+  results <- dplyr::tibble()
+  page_token <- NULL
+  repeat {
     data <- tuber::get_playlists(
       filter = c(channel_id = channel_id),
-      page_token = next_page_token
+      page_token = page_token
     )
-    next_page_token <- data$nextPageToken
 
-    df <- tibble(data = data$items) %>%
-      unnest_wider("data") %>%
-      unnest_wider("snippet") %>%
-      unnest_wider("id", names_sep = ".")
+    page_df <- dplyr::tibble(data = data$items) %>%
+      dplyr::unnest_wider("data") %>%
+      dplyr::unnest_wider("snippet") %>%
+      dplyr::unnest_wider("id", names_sep = ".")
 
-    results <- rbind(results, df)
+    results <- rbind(results, page_df)
+
+    page_token <- data$nextPageToken
+    # Check if we've reached the end of the available pages
+    if (!is.character(page_token)) {
+      break
+    }
   }
 
   # Filter the results based on the q parameter
   if (!is.null(q)) {
     results <- results %>%
-      dplyr::filter(grepl(q, title, ignore.case = TRUE) |
-        grepl(q, description, ignore.case = TRUE))
+      dplyr::filter(grepl(q, .data$title, ignore.case = TRUE) |
+        grepl(q, .data$description, ignore.case = TRUE))
   }
 
   return(results)

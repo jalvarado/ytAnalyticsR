@@ -4,7 +4,7 @@
 \alias{make_request}
 \title{Make an API request to a Google API}
 \usage{
-make_request(x, ..., user_agent = gargle_user_agent())
+make_request(x, ..., user_agent = yt_analytics_ua())
 }
 \description{
 Make an API request to a Google API

@@ -2,7 +2,7 @@
 
 export(channel.demographics)
 export(channel.query)
-export(find_playlist)
+export(find_playlists)
 export(get_playlist_videos)
 export(make_request)
 export(playlist.demographics)
