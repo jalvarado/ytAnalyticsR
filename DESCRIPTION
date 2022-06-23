@@ -15,7 +15,8 @@ Imports:
   tuber (>= 0.9.9),
   dplyr,
   tidyr,
-  httr
+  httr,
+  rlang
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 Suggests:

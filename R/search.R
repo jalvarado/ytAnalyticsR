@@ -11,6 +11,7 @@
 #'
 #' @importFrom dplyr tibble %>%
 #' @importFrom tidyr unnest_wider
+#' @importFrom rlang .data .env
 #'
 #' @seealso [tuber::get_playlists()] for additional parameters
 #' @seealso [grepl()] for regular expression requirements in the \code{q}
