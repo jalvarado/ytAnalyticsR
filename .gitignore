@@ -4,6 +4,7 @@
 renv/
 .Rhistory
 .Rprofile
+.Renviron
 gar_parse_error.rds
 renv.lock
 inst/doc
