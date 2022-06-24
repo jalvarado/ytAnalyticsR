@@ -19,9 +19,9 @@
 #'
 #' @export
 find_playlists <- function(channel_id = NULL,
-                          title = NULL,
-                          q = NULL,
-                          ...) {
+                           title = NULL,
+                           q = NULL,
+                           ...) {
   # Either `title` or `q` must be provided.
   if (is.null(title) && is.null(q)) {
     stop("Either `title` or `q` must be provided, but not both.")
