@@ -98,6 +98,8 @@ yt_analytics_token <- function() {
 #' @param api_key String containing an API key that can be used to authenticate
 #' with Google APIs
 #'
+#' @return invisible
+#'
 #' @export
 yt_analytics_auth_configure <- function(app, path, api_key) {
   if (!missing(app) && !missing(path)) {

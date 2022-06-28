@@ -17,6 +17,12 @@ rmNullObs <- function(x) {
   })
 }
 
+#' Internal helpler function to parse the API response to a data.frame
+#' and set the column names appropriately.
+#'
+#' @param r API response list from gargle::response_process
+#'
+#' @return data.frame parsed API response.
 response_to_data_frame <- function(r) {
   headers <- lapply(r$columnHeaders, `[[`, "name")
   if (length(r$rows) == 0) {
