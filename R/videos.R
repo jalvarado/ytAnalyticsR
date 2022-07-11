@@ -93,12 +93,7 @@ video.demographics <- function(video_id, start_date, end_date,
 #'
 #' @export
 vvideo.query <- function(video_ids, ...) {
-  dfs <- list()
-  for (id in video_ids) {
-    df <- video.query(id, ...)
-    dfs <- append(dfs, list(df))
-  }
-
+  dfs <- lapply(video_ids, function(id) video.query(id, ...))
   do.call(what = rbind, args = dfs)
 }
 
