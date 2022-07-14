@@ -24,9 +24,7 @@ playlist_video_metrics(
 
 \item{dimensions}{Character comma-separated list of dimensions.}
 
-\item{channel_id}{Character containig the YouTube channel ID.}
-
-\item{playlist_title}{Character playlist title. Optional}
+\item{sort}{}
 }
 \description{
 Get analytics data for all videos in the given playlist.
