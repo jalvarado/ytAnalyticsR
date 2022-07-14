@@ -17,7 +17,7 @@
 channel.query <- function(channel_id, start_date = NULL, end_date = NULL,
                           metrics = NULL, dimensions = NULL, sort = NULL,
                           filters = NULL, max_results = NULL) {
-  reports.query(
+  data <- reports.query(
     startDate = start_date,
     endDate = end_date,
     metrics = metrics,
@@ -27,6 +27,16 @@ channel.query <- function(channel_id, start_date = NULL, end_date = NULL,
     maxResults = max_results,
     ids = paste0("channel==", channel_id)
   )
+
+  if (nrow(data) == 0) {
+    columns <- names(data)
+    data <- data.frame(matrix(ncol = length(columns) + 1, nrow = 0))
+    colnames(data) <- c(columns, "channel_id")
+  } else {
+    data$channel_id <- channel_id
+  }
+
+  data
 }
 
 #' Query the Analytics API for channel demographics metrics
