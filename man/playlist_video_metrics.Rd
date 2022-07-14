@@ -8,23 +8,25 @@ playlist_video_metrics(
   playlist_id,
   start_date,
   end_date,
-  playlist_title = NULL,
   metrics = "views,likes,dislikes",
-  dimensions = "day"
+  dimensions = "day",
+  sort = "day"
 )
 }
 \arguments{
-\item{playlist_id}{Character containig the YouTube playlist ID.}
+\item{playlist_id}{Character playlist ID. Optional}
 
 \item{start_date}{Character containing the start date string. "YYYY-MM-DD"}
 
 \item{end_date}{Character containing the end date string. "YYYY-MM-DD"}
 
-\item{playlist_title}{Character playlist title. Optional}
-
 \item{metrics}{Character comma-separated list of metrics to fetch.}
 
 \item{dimensions}{Character comma-separated list of dimensions.}
+
+\item{channel_id}{Character containig the YouTube channel ID.}
+
+\item{playlist_title}{Character playlist title. Optional}
 }
 \description{
 Get analytics data for all videos in the given playlist.

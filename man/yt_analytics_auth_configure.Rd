@@ -14,6 +14,9 @@ yt_analytics_auth_configure(app, path, api_key)
 \item{api_key}{String containing an API key that can be used to authenticate
 with Google APIs}
 }
+\value{
+invisible
+}
 \description{
 Change the defaults used during the authentication process.
 }

@@ -9,25 +9,36 @@
 #' @param dimensions Character comma-separated list of dimensions.
 #'
 #' @export
-playlist_video_metrics <- function(channel_id,
+playlist_video_metrics <- function(playlist_id,
                                    start_date,
                                    end_date,
-                                   playlist_id = NULL,
-                                   playlist_title = NULL,
                                    metrics = "views,likes,dislikes",
-                                   dimensions = "day") {
-  if (is.null(playlist_id) && is.null(playlist_title)) {
-    stop("Either `playlist_id` or `playlist_title` is required.")
-  }
+                                   dimensions = "day",
+                                   sort = "day") {
 
-  if (!is.null(playlist_id) && !is.null(playlist_title)) {
-    stop("Both `playlist_id` and `playlist_title` should not be set.
-      Please use one or the other.")
-  }
+  # Get all the videos from the playlist with their titles and ids
+  videos <- get_playlist_videos(
+    playlist_id,
+    part = "snippet",
+    simplify = TRUE,
+    max_results = 51
+  )[c("snippet.resourceId.videoId", "snippet.title")] %>%
+    dplyr::rename(video_id = snippet.resourceId.videoId)
 
-  if (is.character(playlist_title)) {
-    results <- tuber::yt_search(term = playlist_title, type = "playlist")
-  }
+  video_metrics <- vvideo.query(
+    video_id = videos$video_id,
+    metrics = metrics,
+    dimensions = dimensions,
+    start_date = start_date,
+    end_date = end_date,
+    sort = sort
+  )
 
-
+  print(names(videos))
+  print(names(video_metrics))
+  data <- merge(videos,
+                video_metrics,
+                by = "video_id",
+                all.x = TRUE)
+  data
 }
