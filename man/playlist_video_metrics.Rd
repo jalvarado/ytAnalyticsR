@@ -24,7 +24,7 @@ playlist_video_metrics(
 
 \item{dimensions}{Character comma-separated list of dimensions.}
 
-\item{sort}{}
+\item{sort}{Character comma-separated list of dimensions to sort by.}
 }
 \description{
 Get analytics data for all videos in the given playlist.

@@ -5,7 +5,8 @@
 #'
 #' @importFrom tuber get_playlist_items
 #'
-#' @seealso [tuber::get_playlist_items()] for additional arguments
+#' @seealso \code{\link[tuber::get_playlist_items]{tuber::get_playlist_items()}}
+#' for additional arguments
 #' @export
 get_playlist_videos <- function(playlist_id, ...) {
   tuber::get_playlist_items(

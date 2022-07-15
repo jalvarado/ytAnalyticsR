@@ -1,12 +1,11 @@
 #' Get analytics data for all videos in the given playlist.
 #'
-#' @param channel_id Character containig the YouTube channel ID.
 #' @param start_date Character containing the start date string. "YYYY-MM-DD"
 #' @param end_date Character containing the end date string. "YYYY-MM-DD"
 #' @param playlist_id Character playlist ID. Optional
-#' @param playlist_title Character playlist title. Optional
 #' @param metrics Character comma-separated list of metrics to fetch.
 #' @param dimensions Character comma-separated list of dimensions.
+#' @param sort Character comma-separated list of dimensions to sort by.
 #'
 #' @export
 playlist_video_metrics <- function(playlist_id,
@@ -23,10 +22,11 @@ playlist_video_metrics <- function(playlist_id,
     simplify = TRUE,
     max_results = 51
   )[c("snippet.resourceId.videoId", "snippet.title")] %>%
-    dplyr::rename(video_id = snippet.resourceId.videoId)
+    dplyr::rename(video_id = "snippet.resourceId.videoId",
+                  title = "snippet.title")
 
   video_metrics <- vvideo.query(
-    video_id = videos$video_id,
+    video_ids = videos$video_id,
     metrics = metrics,
     dimensions = dimensions,
     start_date = start_date,
@@ -34,8 +34,6 @@ playlist_video_metrics <- function(playlist_id,
     sort = sort
   )
 
-  print(names(videos))
-  print(names(video_metrics))
   data <- merge(videos,
                 video_metrics,
                 by = "video_id",

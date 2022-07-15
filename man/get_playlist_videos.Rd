@@ -29,5 +29,6 @@ returned, optional}
 Get all videos in the given playlist
 }
 \seealso{
-\code{\link[tuber:get_playlist_items]{tuber::get_playlist_items()}} for additional arguments
+\code{\link[tuber::get_playlist_items]{tuber::get_playlist_items()}}
+for additional arguments
 }
